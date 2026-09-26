@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="STREETFIND — encontre os melhores achados de moda."
+    >
 
     <title>STREETFIND — Achados de Moda</title>
 
@@ -11,30 +21,57 @@
 
 <body>
 
-    <!-- CABEÇALHO -->
-    <header class="header">
-        <div class="logo">STREETFIND</div>
+    <!-- HEADER -->
 
-        <button class="menu-button" id="menuButton">
+    <header class="header">
+
+        <a href="#" class="brand">
+
+            <img
+                src="https://cdn.discordapp.com/attachments/1550241349071151187/1553220901955436674/IMG-20260925-WA0021.jpg?ex=6ab87530&is=6ab723b0&hm=a3704997aa42f3df8d4b56fe72fd128da972f9379215fb1a6e95ffc3b7b156e6&"
+                alt="STREETFIND"
+                class="logo-image"
+            >
+
+        </a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Abrir menu"
+        >
             ☰
         </button>
+
     </header>
 
 
     <!-- MENU -->
+
     <nav class="menu" id="menu">
+
         <a href="#">Início</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#categorias">Categorias</a>
+
+        <a href="#produtos">
+            Achados
+        </a>
+
+        <a href="#categorias">
+            Categorias
+        </a>
+
     </nav>
 
 
     <!-- HERO -->
+
     <main>
 
         <section class="hero">
 
-            <p class="hero-small">SEU ESTILO. SEU ACHADO.</p>
+            <p class="hero-small">
+                STREETWEAR • MODA • ACHADOS
+            </p>
 
             <h1>
                 ENCONTRE<br>
@@ -42,18 +79,26 @@
             </h1>
 
             <p class="hero-description">
-                Os melhores achados de moda em um só lugar.
+                Descubra peças e achados de moda
+                selecionados em diferentes lojas.
             </p>
 
-            <a href="#produtos" class="hero-button">
-                EXPLORAR ACHADOS
+            <a
+                href="#produtos"
+                class="hero-button"
+            >
+                EXPLORAR ACHADOS →
             </a>
 
         </section>
 
 
         <!-- CATEGORIAS -->
-        <section class="categories" id="categorias">
+
+        <section
+            class="categories"
+            id="categorias"
+        >
 
             <div class="section-title">
                 <span>CATEGORIAS</span>
@@ -61,11 +106,47 @@
 
             <div class="category-list">
 
-                <button>👟 Tênis</button>
-                <button>👕 Camisetas</button>
-                <button>👖 Calças</button>
-                <button>🧥 Jaquetas</button>
-                <button>🧢 Acessórios</button>
+                <button
+                    class="category-button selected"
+                    data-category="todos"
+                >
+                    TODOS
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="tenis"
+                >
+                    TÊNIS
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="camisetas"
+                >
+                    CAMISETAS
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="calcas"
+                >
+                    CALÇAS
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="jaquetas"
+                >
+                    JAQUETAS
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="acessorios"
+                >
+                    ACESSÓRIOS
+                </button>
 
             </div>
 
@@ -73,27 +154,61 @@
 
 
         <!-- PRODUTOS -->
-        <section class="products" id="produtos">
 
-            <div class="section-title">
-                <span>🔥 ACHADINHOS</span>
+        <section
+            class="products"
+            id="produtos"
+        >
+
+            <div class="products-top">
+
+                <div class="section-title">
+                    <span>🔥 ACHADINHOS</span>
+                </div>
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Buscar produto..."
+                        autocomplete="off"
+                    >
+
+                    <span>⌕</span>
+
+                </div>
+
             </div>
 
-            <div class="product-grid" id="productGrid">
 
-                <!-- Os produtos serão colocados pelo JavaScript -->
+            <div
+                class="product-grid"
+                id="productGrid"
+            ></div>
 
-            </div>
+
+            <p
+                class="no-results"
+                id="noResults"
+            >
+                Nenhum produto encontrado.
+            </p>
 
         </section>
 
     </main>
 
 
-    <!-- RODAPÉ -->
+    <!-- FOOTER -->
+
     <footer class="footer">
 
-        <div class="logo">STREETFIND</div>
+        <img
+            src="https://cdn.discordapp.com/attachments/1550241349071151187/1553220901955436674/IMG-20260925-WA0021.jpg?ex=6ab87530&is=6ab723b0&hm=a3704997aa42f3df8d4b56fe72fd128da972f9379215fb1a6e95ffc3b7b156e6&"
+            alt="STREETFIND"
+            class="footer-logo"
+        >
 
         <p>
             Achados de moda selecionados para você.
@@ -109,4 +224,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
