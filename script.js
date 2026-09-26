@@ -1,48 +1,89 @@
 const produtos = [
+
     {
         nome: "Nike Tech Fleece",
         fonte: "Shopee",
         preco: "R$ 149,90",
+        categoria: "calcas",
         imagem: "https://placehold.co/600x750/111111/ffffff?text=NIKE+TECH",
         link: "#"
     },
+
     {
         nome: "Camiseta Oversized",
         fonte: "SHEIN",
         preco: "R$ 59,90",
+        categoria: "camisetas",
         imagem: "https://placehold.co/600x750/181818/ffffff?text=OVERSIZED",
         link: "#"
     },
+
     {
         nome: "Calça Cargo Streetwear",
         fonte: "Shopee",
         preco: "R$ 89,90",
+        categoria: "calcas",
         imagem: "https://placehold.co/600x750/111111/ffffff?text=CARGO",
         link: "#"
     },
+
     {
         nome: "Tênis Street",
         fonte: "SHEIN",
         preco: "R$ 129,90",
+        categoria: "tenis",
         imagem: "https://placehold.co/600x750/181818/ffffff?text=SNEAKER",
         link: "#"
     }
+
 ];
 
-const productGrid = document.getElementById("productGrid");
+
+const productGrid =
+    document.getElementById("productGrid");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const noResults =
+    document.getElementById("noResults");
+
+
+let categoriaAtual = "todos";
+
+
+/* =========================
+   MOSTRAR PRODUTOS
+========================= */
 
 function mostrarProdutos(lista) {
+
     productGrid.innerHTML = "";
+
+    if (lista.length === 0) {
+
+        noResults.style.display = "block";
+
+        return;
+
+    }
+
+    noResults.style.display = "none";
+
 
     lista.forEach((produto, index) => {
 
-        const card = document.createElement("article");
+        const card =
+            document.createElement("article");
 
         card.className = "product-card";
 
-        card.style.animationDelay = `${index * 0.08}s`;
+        card.style.animationDelay =
+            `${index * 0.07}s`;
+
 
         card.innerHTML = `
+
             <div class="product-image-container">
 
                 <img
@@ -54,23 +95,30 @@ function mostrarProdutos(lista) {
 
             </div>
 
+
             <div class="product-info">
 
                 <h3 class="product-name">
                     ${produto.nome}
                 </h3>
 
+
                 <p class="product-source">
-                    FONTE: <span>${produto.fonte}</span>
+
+                    FONTE:
+                    <span>
+                        ${produto.fonte}
+                    </span>
+
                 </p>
 
-                <div class="product-bottom">
 
-                    <strong class="product-price">
-                        ${produto.preco}
-                    </strong>
+                <strong class="product-price">
 
-                </div>
+                    ${produto.preco}
+
+                </strong>
+
 
                 <a
                     class="product-button"
@@ -78,92 +126,222 @@ function mostrarProdutos(lista) {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
+
                     VER PRODUTO
+
                     <span>↗</span>
+
                 </a>
 
             </div>
+
         `;
 
+
         productGrid.appendChild(card);
+
     });
 
+
     observarCards();
+
 }
+
+
+/* =========================
+   ANIMAÇÃO DOS CARDS
+========================= */
 
 function observarCards() {
 
-    const cards = document.querySelectorAll(".product-card");
+    const cards =
+        document.querySelectorAll(".product-card");
 
-    const observer = new IntersectionObserver(
-        (entries) => {
 
-            entries.forEach(entry => {
+    const observer =
+        new IntersectionObserver(
 
-                if (entry.isIntersecting) {
+            entries => {
 
-                    entry.target.classList.add("show");
+                entries.forEach(entry => {
 
-                    observer.unobserve(entry.target);
-                }
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-            });
+                        entry.target
+                            .classList
+                            .add("show");
 
-        },
-        {
-            threshold: 0.12
-        }
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.1
+            }
+
+        );
+
+
+    cards.forEach(card =>
+        observer.observe(card)
     );
 
-    cards.forEach(card => observer.observe(card));
 }
 
 
-/* MENU */
+/* =========================
+   FILTRAR
+========================= */
 
-const menuButton = document.getElementById("menuButton");
-const menu = document.getElementById("menu");
+function filtrarProdutos() {
 
-menuButton.addEventListener("click", () => {
-
-    menu.classList.toggle("active");
-
-});
-
-
-/* FECHAR MENU */
-
-document.querySelectorAll(".menu a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        menu.classList.remove("active");
-
-    });
-
-});
+    const busca =
+        searchInput.value
+            .toLowerCase()
+            .trim();
 
 
-/* CATEGORIAS */
+    const resultado =
+        produtos.filter(produto => {
+
+            const correspondeCategoria =
+                categoriaAtual === "todos" ||
+                produto.categoria === categoriaAtual;
+
+
+            const correspondeBusca =
+                produto.nome
+                    .toLowerCase()
+                    .includes(busca) ||
+
+                produto.fonte
+                    .toLowerCase()
+                    .includes(busca);
+
+
+            return (
+                correspondeCategoria &&
+                correspondeBusca
+            );
+
+        });
+
+
+    mostrarProdutos(resultado);
+
+}
+
+
+/* =========================
+   PESQUISA
+========================= */
+
+searchInput.addEventListener(
+    "input",
+    filtrarProdutos
+);
+
+
+/* =========================
+   CATEGORIAS
+========================= */
 
 const categoryButtons =
-    document.querySelectorAll(".category-list button");
+    document.querySelectorAll(
+        ".category-button"
+    );
+
 
 categoryButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-        categoryButtons.forEach(btn => {
-            btn.classList.remove("selected");
-        });
+            categoryButtons.forEach(btn => {
 
-        button.classList.add("selected");
+                btn.classList.remove(
+                    "selected"
+                );
 
-    });
+            });
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
+            categoriaAtual =
+                button.dataset.category;
+
+
+            filtrarProdutos();
+
+        }
+    );
 
 });
 
 
-/* INICIAR */
+/* =========================
+   MENU
+========================= */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const menu =
+    document.getElementById("menu");
+
+
+menuButton.addEventListener(
+    "click",
+    () => {
+
+        menu.classList.toggle(
+            "active"
+        );
+
+    }
+);
+
+
+/* =========================
+   FECHAR MENU
+========================= */
+
+document
+    .querySelectorAll(".menu a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            () => {
+
+                menu.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+    });
+
+
+/* =========================
+   INICIAR
+========================= */
 
 mostrarProdutos(produtos);
